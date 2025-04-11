@@ -29,6 +29,11 @@ public class CompanyService {
     }
 
     @Transactional
+    public void delete(Long id){
+        repository.deleteById(id);
+    }
+
+    @Transactional
     public CompanyDTO insert(CompanyDTO dto){
         Company entity = new Company();
         entity.setId(dto.getId());

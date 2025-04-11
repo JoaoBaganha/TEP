@@ -24,6 +24,11 @@ public class CompanyController {
         return service.findAll();
     }
 
+    @DeleteMapping(value = "/{id}")
+    public void delete(@PathVariable Long id){
+        service.delete(id);
+    }
+
     @PostMapping
     public CompanyDTO insert(@RequestBody CompanyDTO dto){
         return service.insert(dto);

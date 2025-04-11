@@ -24,13 +24,18 @@ public class CompanyController {
         return service.findAll();
     }
 
-    @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable Long id){
-        service.delete(id);
-    }
-
     @PostMapping
     public CompanyDTO insert(@RequestBody CompanyDTO dto){
         return service.insert(dto);
+    }
+
+    @PutMapping(value = "/{id}")
+    public CompanyDTO update(@PathVariable Long id, @RequestBody CompanyDTO dto){
+        return service.update(id, dto);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public void delete(@PathVariable Long id){
+        service.delete(id);
     }
 }

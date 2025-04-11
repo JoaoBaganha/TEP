@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,6 +20,12 @@ public class CompanyService {
     public CompanyDTO findById(Long id){
         Optional<Company> result = repository.findById(id);
         return new CompanyDTO(result.get());
+    }
+
+    @Transactional(readOnly = true)
+    public List<CompanyDTO> findAll(){
+        List<Company> result = repository.findAll();
+        return result.stream().map(CompanyDTO::new).toList();
     }
 
     @Transactional

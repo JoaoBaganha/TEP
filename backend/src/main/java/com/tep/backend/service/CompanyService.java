@@ -7,11 +7,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 public class CompanyService {
 
     @Autowired
     private CompanyRepository repository;
+
+    @Transactional(readOnly = true)
+    public CompanyDTO findById(Long id){
+        Optional<Company> result = repository.findById(id);
+        return new CompanyDTO(result.get());
+    }
 
     @Transactional
     public CompanyDTO insert(CompanyDTO dto){

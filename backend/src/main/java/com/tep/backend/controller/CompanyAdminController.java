@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController()
-@RequestMapping(value = "/companies")
-public class CompanyController {
+@RestController
+@RequestMapping("/admin/companies")
+public class CompanyAdminController {
 
     @Autowired
     private CompanyService service;
@@ -20,22 +20,22 @@ public class CompanyController {
     }
 
     @GetMapping
-    public List<CompanyDTO> findAll(){
+    public List<CompanyDTO> findAll() {
         return service.findAll();
     }
 
     @PostMapping
-    public CompanyDTO insert(@RequestBody CompanyDTO dto){
+    public CompanyDTO insert(@RequestBody CompanyDTO dto) {
         return service.insert(dto);
     }
 
-    @PutMapping(value = "/{id}")
-    public CompanyDTO update(@PathVariable Long id, @RequestBody CompanyDTO dto){
+    @PutMapping("/{id}")
+    public CompanyDTO update(@PathVariable Long id, @RequestBody CompanyDTO dto) {
         return service.update(id, dto);
     }
 
-    @DeleteMapping(value = "/{id}")
-    public void delete(@PathVariable Long id){
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
         service.delete(id);
     }
 }

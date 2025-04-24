@@ -1,6 +1,7 @@
 package com.tep.backend.service;
 
 import com.tep.backend.model.dto.CompanyDTO;
+import com.tep.backend.model.dto.CompanyMinDTO;
 import com.tep.backend.model.dto.CompanyPublicDTO;
 import com.tep.backend.model.entity.Company;
 import com.tep.backend.repository.CompanyRepository;
@@ -20,6 +21,12 @@ public class CompanyService {
     public CompanyPublicDTO findPublicById(Long id) {
         Company entity = repository.findById(id).get();
         return toPublicDTO(entity);
+    }
+
+    @Transactional(readOnly = true)
+    public List<CompanyMinDTO> findAllMin() {
+        List<Company> entities = repository.findAll();
+        return entities.stream().map(this::toMinDTO).toList();
     }
 
     @Transactional(readOnly = true)
@@ -89,6 +96,15 @@ public class CompanyService {
                 entity.getSector(),
                 entity.getLogoUrl(),
                 entity.getWebsite()
+        );
+    }
+
+    private CompanyMinDTO toMinDTO(Company entity) {
+        return new CompanyMinDTO(
+                entity.getId(),
+                entity.getName(),
+                entity.getSector(),
+                entity.getLogoUrl()
         );
     }
 

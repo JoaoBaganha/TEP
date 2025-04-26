@@ -1,5 +1,6 @@
 package com.tep.backend.model.dto;
 
+import com.tep.backend.model.entity.Company;
 import com.tep.backend.model.entity.CompanyStatus;
 
 import java.time.LocalDate;
@@ -21,18 +22,18 @@ public class CompanyDTO {
     public CompanyDTO() {
     }
 
-    public CompanyDTO(Long id, String name, String description, String sector, String logoUrl, String website, String email, String phone, String cnpj, CompanyStatus status, LocalDate registeredAt) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.sector = sector;
-        this.logoUrl = logoUrl;
-        this.website = website;
-        this.email = email;
-        this.phone = phone;
-        this.cnpj = cnpj;
-        this.status = status;
-        this.registeredAt = registeredAt;
+    public CompanyDTO(Company entity) {
+        id = entity.getId();
+        name = entity.getName();
+        description = entity.getDescription();
+        sector = entity.getSector();
+        logoUrl = entity.getLogoUrl();
+        website = entity.getWebsite();
+        email = entity.getEmail();
+        phone = entity.getPhone();
+        cnpj = entity.getCnpj();
+        status = entity.getStatus();
+        registeredAt = entity.getRegisteredAt();
     }
 
     public Long getId() {

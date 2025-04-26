@@ -1,5 +1,7 @@
 package com.tep.backend.model.dto;
 
+import com.tep.backend.model.entity.Company;
+
 public class CompanyMinDTO {
 
     private Long id;
@@ -10,11 +12,11 @@ public class CompanyMinDTO {
     public CompanyMinDTO() {
     }
 
-    public CompanyMinDTO(Long id, String name, String sector, String logoUrl) {
-        this.id = id;
-        this.name = name;
-        this.sector = sector;
-        this.logoUrl = logoUrl;
+    public CompanyMinDTO(Company entity) {
+        id = entity.getId();
+        name = entity.getName();
+        sector = entity.getSector();
+        logoUrl = entity.getLogoUrl();
     }
 
     public Long getId() {

@@ -20,32 +20,32 @@ public class CompanyService {
     @Transactional(readOnly = true)
     public CompanyPublicDTO findPublicById(Long id) {
         Company entity = repository.findById(id).get();
-        return toPublicDTO(entity);
+        return new CompanyPublicDTO(entity);
     }
 
     @Transactional(readOnly = true)
     public List<CompanyMinDTO> findAllMin() {
         List<Company> entities = repository.findAll();
-        return entities.stream().map(this::toMinDTO).toList();
+        return entities.stream().map(CompanyMinDTO::new).toList();
     }
 
     @Transactional(readOnly = true)
     public CompanyDTO findById(Long id) {
         Company entity = repository.findById(id).get();
-        return toDTO(entity);
+        return new CompanyDTO(entity);
     }
 
     @Transactional(readOnly = true)
     public List<CompanyDTO> findAll() {
         List<Company> entities = repository.findAll();
-        return entities.stream().map(this::toDTO).toList();
+        return entities.stream().map(CompanyDTO::new).toList();
     }
 
     @Transactional
     public CompanyDTO insert(CompanyDTO dto) {
         Company entity = toEntity(dto);
         entity = repository.save(entity);
-        return toDTO(entity);
+        return new CompanyDTO(entity);
     }
 
     @Transactional
@@ -64,48 +64,12 @@ public class CompanyService {
         entity.setRegisteredAt(dto.getRegisteredAt());
 
         entity = repository.save(entity);
-        return toDTO(entity);
+        return new CompanyDTO(entity);
     }
 
     @Transactional
     public void delete(Long id) {
         repository.deleteById(id);
-    }
-
-    private CompanyDTO toDTO(Company entity) {
-        return new CompanyDTO(
-                entity.getId(),
-                entity.getName(),
-                entity.getDescription(),
-                entity.getSector(),
-                entity.getLogoUrl(),
-                entity.getWebsite(),
-                entity.getEmail(),
-                entity.getPhone(),
-                entity.getCnpj(),
-                entity.getStatus(),
-                entity.getRegisteredAt()
-        );
-    }
-
-    private CompanyPublicDTO toPublicDTO(Company entity) {
-        return new CompanyPublicDTO(
-                entity.getId(),
-                entity.getName(),
-                entity.getDescription(),
-                entity.getSector(),
-                entity.getLogoUrl(),
-                entity.getWebsite()
-        );
-    }
-
-    private CompanyMinDTO toMinDTO(Company entity) {
-        return new CompanyMinDTO(
-                entity.getId(),
-                entity.getName(),
-                entity.getSector(),
-                entity.getLogoUrl()
-        );
     }
 
     private Company toEntity(CompanyDTO dto) {

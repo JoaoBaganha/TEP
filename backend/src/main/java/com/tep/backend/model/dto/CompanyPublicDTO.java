@@ -1,5 +1,7 @@
 package com.tep.backend.model.dto;
 
+import com.tep.backend.model.entity.Company;
+
 public class CompanyPublicDTO {
 
     private Long id;
@@ -12,13 +14,13 @@ public class CompanyPublicDTO {
     public CompanyPublicDTO() {
     }
 
-    public CompanyPublicDTO(Long id, String name, String description, String sector, String logoUrl, String website) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.sector = sector;
-        this.logoUrl = logoUrl;
-        this.website = website;
+    public CompanyPublicDTO(Company entity) {
+        id = entity.getId();
+        name = entity.getName();
+        description = entity.getDescription();
+        sector = entity.getSector();
+        logoUrl = entity.getLogoUrl();
+        website = entity.getWebsite();
     }
 
     public Long getId() {

@@ -1,28 +1,34 @@
 package com.tep.backend.model.dto;
 
+import com.tep.backend.model.entity.Token;
+
 import java.time.LocalDateTime;
 
 public class TokenDTO {
 
     private Long id;
+    private Long companyId;
+    private String productName;
+    private String productImageUrl;
     private String name;
     private String symbol;
     private String contractAddress;
     private String tokenType;
     private LocalDateTime createdAt;
-    private CompanyDTO company;
 
     public TokenDTO() {
     }
 
-    public TokenDTO(Long id, String name, String symbol, String contractAddress, String tokenType, LocalDateTime createdAt, CompanyDTO company) {
-        this.id = id;
-        this.name = name;
-        this.symbol = symbol;
-        this.contractAddress = contractAddress;
-        this.tokenType = tokenType;
-        this.createdAt = createdAt;
-        this.company = company;
+    public TokenDTO(Token entity) {
+        id = entity.getId();
+        companyId = entity.getCompany().getId();
+        productName = entity.getProductName();
+        productImageUrl = entity.getProductImageUrl();
+        name = entity.getName();
+        symbol = entity.getSymbol();
+        contractAddress = entity.getContractAddress();
+        tokenType = entity.getTokenType();
+        createdAt = entity.getCreatedAt();
     }
 
     public Long getId() {
@@ -31,6 +37,30 @@ public class TokenDTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Long companyId) {
+        this.companyId = companyId;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getProductImageUrl() {
+        return productImageUrl;
+    }
+
+    public void setProductImageUrl(String productImageUrl) {
+        this.productImageUrl = productImageUrl;
     }
 
     public String getName() {
@@ -71,13 +101,5 @@ public class TokenDTO {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public CompanyDTO getCompany() {
-        return company;
-    }
-
-    public void setCompany(CompanyDTO company) {
-        this.company = company;
     }
 }

@@ -12,27 +12,32 @@ public class Token {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private Company company;
+
+    private String productName;
+    private String productImageUrl;
     private String name;
     private String symbol;
     private String contractAddress;
     private String tokenType;
     private LocalDateTime createdAt;
 
-    @ManyToOne
-    @JoinColumn(name = "company_id")
-    private Company company;
-
     public Token() {
     }
 
-    public Token(Long id, String name, String symbol, String contractAddress, String tokenType, LocalDateTime createdAt, Company company) {
+    public Token(Long id, Company company, String productName, String productImageUrl, String name, String symbol, String contractAddress, String tokenType, LocalDateTime createdAt) {
         this.id = id;
+        this.company = company;
+        this.productName = productName;
+        this.productImageUrl = productImageUrl;
         this.name = name;
         this.symbol = symbol;
         this.contractAddress = contractAddress;
         this.tokenType = tokenType;
         this.createdAt = createdAt;
-        this.company = company;
     }
 
     public Long getId() {
@@ -41,6 +46,30 @@ public class Token {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getProductImageUrl() {
+        return productImageUrl;
+    }
+
+    public void setProductImageUrl(String productImageUrl) {
+        this.productImageUrl = productImageUrl;
     }
 
     public String getName() {
@@ -81,14 +110,6 @@ public class Token {
 
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
-    }
-
-    public Company getCompany() {
-        return company;
-    }
-
-    public void setCompany(Company company) {
-        this.company = company;
     }
 
     @Override

@@ -40,6 +40,11 @@ public class Token {
         this.createdAt = createdAt;
     }
 
+    @PrePersist
+    public void prePersist() {
+        createdAt = LocalDateTime.now();
+    }
+
     public Long getId() {
         return id;
     }

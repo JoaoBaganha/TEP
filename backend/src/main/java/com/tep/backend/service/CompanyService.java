@@ -73,18 +73,18 @@ public class CompanyService {
     }
 
     private Company toEntity(CompanyDTO dto) {
-        return new Company(
-                dto.getId(),
-                dto.getName(),
-                dto.getDescription(),
-                dto.getSector(),
-                dto.getLogoUrl(),
-                dto.getWebsite(),
-                dto.getEmail(),
-                dto.getPhone(),
-                dto.getCnpj(),
-                dto.getStatus(),
-                dto.getRegisteredAt()
-        );
+        Company entity = new Company();
+        entity.setId(dto.getId());
+        entity.setName(dto.getName());
+        entity.setDescription(dto.getDescription());
+        entity.setSector(dto.getSector());
+        entity.setLogoUrl(dto.getLogoUrl());
+        entity.setWebsite(dto.getWebsite());
+        entity.setEmail(dto.getEmail());
+        entity.setPhone(dto.getPhone());
+        entity.setCnpj(dto.getCnpj());
+        entity.setStatus(dto.getStatus());
+        entity.setRegisteredAt(dto.getRegisteredAt());
+        return entity;
     }
 }

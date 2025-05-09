@@ -8,9 +8,11 @@ import java.util.Objects;
 @Entity
 @Table(name = "tb_company")
 public class Company {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
     private String description;
     private String sector;
@@ -22,15 +24,13 @@ public class Company {
     private CompanyStatus status;
     private LocalDate registeredAt;
 
-    @PrePersist
-    protected void onCreate() {
-        this.registeredAt = LocalDate.now();
-    }
+    @OneToOne(mappedBy = "company", cascade = CascadeType.ALL)
+    private Token token;
 
     public Company(){
     }
 
-    public Company(Long id, String name, String description, String sector, String logoUrl, String website, String email, String phone, String cnpj, CompanyStatus status, LocalDate registeredAt) {
+    public Company(Long id, String name, String description, String sector, String logoUrl, String website, String email, String phone, String cnpj, CompanyStatus status, LocalDate registeredAt, Token token) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -42,6 +42,12 @@ public class Company {
         this.cnpj = cnpj;
         this.status = status;
         this.registeredAt = registeredAt;
+        this.token = token;
+    }
+
+    @PrePersist
+    protected void onCreate() {
+        this.registeredAt = LocalDate.now();
     }
 
     public Long getId() {
@@ -130,6 +136,14 @@ public class Company {
 
     public void setRegisteredAt(LocalDate registeredAt) {
         this.registeredAt = registeredAt;
+    }
+
+    public Token getToken() {
+        return token;
+    }
+
+    public void setToken(Token token) {
+        this.token = token;
     }
 
     @Override

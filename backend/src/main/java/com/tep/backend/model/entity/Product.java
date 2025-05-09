@@ -1,13 +1,12 @@
 package com.tep.backend.model.entity;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
-@Table(name = "tb_token")
-public class Token {
+@Table(name = "tb_product")
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,44 +16,34 @@ public class Token {
     @JoinColumn(name = "company_id")
     private Company company;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private TokenType type;
-
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    private Product product;
-
     private String name;
-    private String symbol;
     private String description;
     private String imageUrl;
-    private String contractAddress;
-    private LocalDateTime createdAt;
+    private String redemptionRules;
+    private LocalDateTime validityPeriod;
     private Boolean active;
-
-    public Token() {
-    }
-
-    public Token(Long id, Company company, TokenType type, Product product, String name, 
-                String symbol, String description, String imageUrl, String contractAddress, 
-                LocalDateTime createdAt, Boolean active) {
-        this.id = id;
-        this.company = company;
-        this.type = type;
-        this.product = product;
-        this.name = name;
-        this.symbol = symbol;
-        this.description = description;
-        this.imageUrl = imageUrl;
-        this.contractAddress = contractAddress;
-        this.createdAt = createdAt;
-        this.active = active;
-    }
+    private LocalDateTime createdAt;
 
     @PrePersist
     public void prePersist() {
         this.createdAt = LocalDateTime.now();
+    }
+
+    public Product() {
+    }
+
+    public Product(Long id, Company company, String name, String description, 
+                  String imageUrl, String redemptionRules, LocalDateTime validityPeriod, 
+                  Boolean active, LocalDateTime createdAt) {
+        this.id = id;
+        this.company = company;
+        this.name = name;
+        this.description = description;
+        this.imageUrl = imageUrl;
+        this.redemptionRules = redemptionRules;
+        this.validityPeriod = validityPeriod;
+        this.active = active;
+        this.createdAt = createdAt;
     }
 
     public Long getId() {
@@ -73,36 +62,12 @@ public class Token {
         this.company = company;
     }
 
-    public TokenType getType() {
-        return type;
-    }
-
-    public void setType(TokenType type) {
-        this.type = type;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getSymbol() {
-        return symbol;
-    }
-
-    public void setSymbol(String symbol) {
-        this.symbol = symbol;
     }
 
     public String getDescription() {
@@ -121,20 +86,20 @@ public class Token {
         this.imageUrl = imageUrl;
     }
 
-    public String getContractAddress() {
-        return contractAddress;
+    public String getRedemptionRules() {
+        return redemptionRules;
     }
 
-    public void setContractAddress(String contractAddress) {
-        this.contractAddress = contractAddress;
+    public void setRedemptionRules(String redemptionRules) {
+        this.redemptionRules = redemptionRules;
     }
 
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
+    public LocalDateTime getValidityPeriod() {
+        return validityPeriod;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
+    public void setValidityPeriod(LocalDateTime validityPeriod) {
+        this.validityPeriod = validityPeriod;
     }
 
     public Boolean getActive() {
@@ -145,11 +110,19 @@ public class Token {
         this.active = active;
     }
 
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        Token token = (Token) o;
-        return Objects.equals(id, token.id);
+        Product product = (Product) o;
+        return Objects.equals(id, product.id);
     }
 
     @Override

@@ -18,6 +18,7 @@ public class CompanyDTO {
     private String cnpj;
     private CompanyStatus status;
     private LocalDate registeredAt;
+    private Long tokenId;
 
     public CompanyDTO() {
     }
@@ -34,6 +35,7 @@ public class CompanyDTO {
         cnpj = entity.getCnpj();
         status = entity.getStatus();
         registeredAt = entity.getRegisteredAt();
+        tokenId = (entity.getToken() != null) ? entity.getToken().getId() : null;
     }
 
     public Long getId() {
@@ -122,5 +124,13 @@ public class CompanyDTO {
 
     public void setRegisteredAt(LocalDate registeredAt) {
         this.registeredAt = registeredAt;
+    }
+
+    public Long getTokenId() {
+        return tokenId;
+    }
+
+    public void setTokenId(Long tokenId) {
+        this.tokenId = tokenId;
     }
 }
